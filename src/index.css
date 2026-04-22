@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --red: #dc2626;
+  --bg: #030303;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: rgba(255, 255, 255, 0.849);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+/* THE FIX: This makes the "GREGORY" text visible but "hollow" */
+.hero-bg-text {
+  /* Increase opacity from 0.1 to 0.4 for visibility */
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.836);
+  color: white; /* Set text color to white for better visibility */
+  font-weight: 900;
+  opacity: o;
+  text-transform: uppercase;
+  /* Hardware acceleration for GSAP */
+  will-change: transform, opacity;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 15px;
+  height: 15px;
+  background: var(--red);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+}
+
+/* Section Transitions */
+.reveal-item {
+  will-change: transform, opacity;
+}
+
+/* Custom utility for the 'Brutalist' Shadow */
+.brutalist-shadow {
+  box-shadow: 8px 8px 0px #000000;
+}
+
+/* Accent shadow for Red elements */
+.red-shadow {
+  box-shadow: 6px 6px 0px #ff0000;
+}
+/* The 'Hollow' Heading Look */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+}
+
+/* The aggressive italic weight */
+.heading-heavy {
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+}
+.cta-glow:hover {
+  filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6));
+}
+/* Custom Selection */
+::selection {
+  background-color: #ff0000;
+  color: #000000;
+}
+
+/* Custom Scrollbar for Chrome/Safari */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030303;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+  border-radius: 10px;
+}
