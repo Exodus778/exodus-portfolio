@@ -221,7 +221,7 @@ function App() {
         </div>
         <div className="relative z-10 text-center flex flex-col items-center">
           <h2 className="reveal-item text-black text-7xl md:text-[12vw] font-[1000] italic uppercase leading-none mb-10">
-            Let’s solve your <br /> Toughest challenge.
+            Let’s <br /> Connect
           </h2>
           <a
             href="mailto:gregorydwayne6@email.com"
