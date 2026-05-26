@@ -86,3 +86,7 @@ body {
   background: #ff0000;
   border-radius: 10px;
 }
+.your-animating-class {
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Forces GPU layer */
+}

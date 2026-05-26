@@ -31,6 +31,30 @@ function App() {
       client: "Matthew Folmid - Lead Sales Rep",
       video: "/dax-luxury-watches.mp4",
     },
+    {
+      title: "Exodeploy",
+      type: "DEVOPS & DEPLOYMENT PLATFORM",
+      description:
+        "A cloud deployment engine designed for automated workflow scaling.",
+      caseStudy:
+        "Engineered an optimized CI/CD bridging protocol that reduced production pipeline deployment lag by 25%.",
+      review:
+        "Effortless, raw performance. It stripped away all unnecessary friction from our software delivery cycles.",
+      client: "Internal Product - Core Dev",
+      video: "/exodeploy.mp4",
+    },
+    {
+      title: "Beauty Sense Cosmetics",
+      type: "E-COMMERCE & BRAND EXPERIENCE",
+      description:
+        "A luxury skincare and cosmetics digital flagship retail store.",
+      caseStudy:
+        "Architected a headless commerce storefront utilizing ultra-fast page routing and custom micro-interactions to elevate product discovery.",
+      review:
+        "The brand aesthetics translate beautifully into the digital space. It feels like a high-end storefront from the very first frame.",
+      client: "Internal Concept - Design Lab",
+      video: "/beauty-sense-cosmetics.mp4",
+    },
   ];
 
   const mainRef = useRef(null);
@@ -91,40 +115,58 @@ function App() {
     >
       {/* --- HERO SECTION --- */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <nav className="absolute top-0 w-full flex justify-between p-10 z-100 uppercase tracking-[0.4em]">
-          <div className="nav-anim border-l-4 border-red-600 pl-4">
-            <p className="font-[1000] text-sm leading-none">Frontend</p>
-            <p className="text-[10px] text-zinc-500 font-bold">Developer</p>
-          </div>
+        {/* --- Wrapper around the entire nav structure --- */}
+        <div className="absolute top-0 w-full p-10 z-50">
+          <nav className="w-full flex justify-between items-center uppercase tracking-[0.4em]">
+            {/* --- Interactive Frontend Developer Box --- */}
+            <div className="nav-anim group border border-white/10 bg-zinc-950/40 backdrop-blur-md py-3 px-5 rounded-xl flex flex-col justify-center transition-all duration-300 hover:bg-red-600 hover:border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] select-none">
+              <p className="font-black text-xs leading-none text-white group-hover:text-black transition-colors duration-300">
+                Frontend
+              </p>
+              <p className="text-[16px] text-red-600 font-[1000] tracking-normal mt-1 group-hover:text-black transition-colors duration-300">
+                Developer
+              </p>
+            </div>
 
-          <div className="hidden lg:flex gap-16 items-center font-[1000] text-[11px] text-zinc-400">
-            <button
-              onClick={() => scroll("works")}
-              className="nav-item cursor-pointer"
-            >
-              Projects
-            </button>
-            <button
-              onClick={() => scroll("about")}
-              className="nav-item cursor-pointer"
-            >
-              About
-            </button>
-            <button
-              onClick={() => scroll("contact")}
-              className="nav-item cursor-pointer"
-            >
-              Contact
-            </button>
-          </div>
+            {/* --- Styled Navigation Links --- */}
+            <div className="hidden lg:flex gap-16 items-center font-black text-[11px] text-zinc-400">
+              <button
+                onClick={() => scroll("works")}
+                className="nav-anim relative py-2 cursor-pointer transition-colors duration-300 hover:text-white group"
+              >
+                Projects
+                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-red-600 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0" />
+              </button>
+              <button
+                onClick={() => scroll("about")}
+                className="nav-anim relative py-2 cursor-pointer transition-colors duration-300 hover:text-white group"
+              >
+                About
+                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-red-600 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0" />
+              </button>
+              <button
+                onClick={() => scroll("contact")}
+                className="nav-anim relative py-2 cursor-pointer transition-colors duration-300 hover:text-white group"
+              >
+                Contact
+                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-red-600 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0" />
+              </button>
+            </div>
 
-          <div className="nav-anim text-right border-r-4 border-red-600 pr-4">
-            <p className="font-[1000] text-sm leading-none uppercase">
-              Gregory
-            </p>
-            <p className="text-[10px] text-zinc-500 font-bold">[2026]</p>
-          </div>
-        </nav>
+            {/* --- Interactive Name Branding Box --- */}
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="nav-anim group text-right border border-white/10 bg-zinc-950/40 backdrop-blur-md py-3 px-5 rounded-xl cursor-pointer transition-all duration-300 hover:bg-red-600 hover:border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] select-none"
+            >
+              <p className="font-black text-xs leading-none text-zinc-400 group-hover:text-black transition-colors duration-300">
+                Gregory
+              </p>
+              <p className="text-[16px] text-white font-black tracking-normal mt-1 group-hover:text-black transition-colors duration-300">
+                [2026]
+              </p>
+            </button>
+          </nav>
+        </div>
 
         <h1 className="hero-bg-text absolute text-[28vw] font-[1000] italic leading-none select-none z-0 tracking-tighter opacity-90">
           EXODUS
@@ -138,16 +180,71 @@ function App() {
           />
         </div>
 
+        {/* --- INFINITE MARQUEE WITH CUSTOM LOGO --- */}
         <div className="red-belt absolute bottom-[18%] w-[120%] -rotate-2 z-30 bg-red-600 py-6 border-y-8 border-black shadow-[0_30px_60px_rgba(0,0,0,0.8)] flex overflow-hidden">
           <motion.div
             animate={{ x: [0, -1000] }}
             transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="flex whitespace-nowrap gap-12 text-black font-[1000] italic text-lg uppercase"
+            className="flex whitespace-nowrap items-center gap-12 text-black font-[1000] italic text-lg uppercase"
           >
             {[...Array(10)].map((_, i) => (
-              <span key={i}>
-                ● VUE ● FRAMER ● REACT EXPERT ● MOTION DESIGN ● NEXT.JS ● SEO
-                SPECIALIST ● UI/UX ● FRONTEND ●{" "}
+              <span key={i} className="flex items-center gap-12">
+                <span>VUE</span>
+                <svg
+                  className="w-5 h-5 fill-current shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z" />
+                </svg>
+                <span>FRAMER</span>
+                <svg
+                  className="w-5 h-5 fill-current shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z" />
+                </svg>
+                <span>REACT EXPERT</span>
+                <svg
+                  className="w-5 h-5 fill-current shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z" />
+                </svg>
+                <span>MOTION DESIGN</span>
+                <svg
+                  className="w-5 h-5 fill-current shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z" />
+                </svg>
+                <span>NEXT.JS</span>
+                <svg
+                  className="w-5 h-5 fill-current shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z" />
+                </svg>
+                <span>SEO SPECIALIST</span>
+                <svg
+                  className="w-5 h-5 fill-current shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z" />
+                </svg>
+                <span>UI/UX</span>
+                <svg
+                  className="w-5 h-5 fill-current shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z" />
+                </svg>
+                <span>FRONTEND</span>
+                <svg
+                  className="w-5 h-5 fill-current shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z" />
+                </svg>
               </span>
             ))}
           </motion.div>
@@ -157,29 +254,38 @@ function App() {
       {/* --- ABOUT SECTION --- */}
       <section
         id="about"
-        className="reveal-section min-h-screen bg-[#030303] px-10 py-48 md:py-64 flex items-center"
+        className="reveal-section min-h-screen bg-[#030303] px-6 sm:px-12 lg:px-20 py-32 md:py-48 flex items-center justify-center"
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 lg:gap-40">
-          <h2 className="reveal-item text-8xl md:text-[10vw] font-[1000] italic uppercase tracking-tighter leading-[0.8] mb-12 lg:mb-0">
-            Your vision
-            <br /> <span className="text-red-600">My Code.</span>
-          </h2>
-          <br />
-          <div className="reveal-item flex flex-col justify-center gap-12">
-            <p className="text-3xl md:text-5xl font-bold leading-[1.1] text-zinc-300">
+        <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          <div className="lg:col-span-5 sticky lg:top-32">
+            <h2 className="reveal-item text-6xl sm:text-7xl md:text-8xl lg:text-[7vw] font-[1000] italic uppercase tracking-tighter leading-[0.85]">
+              Your vision
+              <br /> <span className="text-red-600">My Code.</span>
+            </h2>
+          </div>
+
+          <div className="lg:col-span-7 flex flex-col gap-8 sm:gap-10 border border-white/5 bg-zinc-950/20 backdrop-blur-sm p-8 sm:p-12 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <p className="reveal-item text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.2] text-zinc-200">
               Bridging the gap between ambitious business ideas and the
-              technical reality . <span className="text-white">Required</span>{" "}
-              to make them <span className="text-red-600">SCALE.</span>
+              technical reality{" "}
+              <span className="text-white underline decoration-red-600 decoration-2 underline-offset-4">
+                required
+              </span>{" "}
+              to make them{" "}
+              <span className="text-red-600 font-[1000]">SCALE.</span>
             </p>
-            <div className="h-2px] w-20 bg-red-600"></div>
-            <p className="text-zinc-500 text-lg md:text-xl max-w-lg leading-relaxed">
+            <div className="reveal-item h-0.5 w-16 bg-red-600 rounded-full"></div>
+            <p className="reveal-item text-zinc-400 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
               I’m a developer who hates friction. I don’t just write code; I
               audit chaos and engineer clarity. While others focus on pixels, I
               focus on performance, scalability, and solving the "impossible"
-              bottlenecks. I’m here to turn your technical debt into a seamless
-              digital asset that actually works for you.Most see a bug, I see a
-              chance to build something better. Let’s build something that makes
-              your life easier."
+              bottlenecks.
+              <br />
+              <br />
+              I’m here to turn your technical debt into a seamless digital asset
+              that actually works for you. Most see a bug, I see a chance to
+              build something better. Let’s build something that makes your life
+              easier.
             </p>
           </div>
         </div>
@@ -221,7 +327,7 @@ function App() {
         </div>
         <div className="relative z-10 text-center flex flex-col items-center">
           <h2 className="reveal-item text-black text-7xl md:text-[12vw] font-[1000] italic uppercase leading-none mb-10">
-            Let’s <br /> Connect
+            Let’s <br /> Connect.
           </h2>
           <a
             href="mailto:gregorydwayne6@email.com"
@@ -232,10 +338,40 @@ function App() {
         </div>
       </section>
 
-      <footer className="py-10 text-center opacity-30 border-t border-white/5">
-        <p className="text-[9px] tracking-[0.8em] uppercase italic font-bold">
-          Adewole Gregory © 2024
-        </p>
+      {/* --- FOOTER COMPONENT --- */}
+      <footer className="py-12 px-10 bg-[#030303]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[10px] tracking-[0.8em] uppercase italic font-bold opacity-30 order-2 md:order-1">
+            Adewole Gregory © 2024
+          </p>
+
+          <div className="flex gap-8 text-xs font-bold tracking-[0.3em] uppercase order-1 md:order-2">
+            <a
+              href="https://github.com/Exodus778"
+              target="_blank"
+              rel="noreferrer"
+              className="text-zinc-500 hover:text-red-600 transition-colors duration-300 flex items-center gap-2"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-zinc-500 hover:text-red-600 transition-colors duration-300 flex items-center gap-2"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://x.com/ExodusonX_"
+              target="_blank"
+              rel="noreferrer"
+              className="text-zinc-500 hover:text-red-600 transition-colors duration-300 flex items-center gap-2"
+            >
+              X / Twitter
+            </a>
+          </div>
+        </div>
       </footer>
     </div>
   );
@@ -263,10 +399,10 @@ function ProjectCard({ num, name, tag, review, client, video, caseStudy }) {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-50 group-hover:opacity-100 scale-110 group-hover:scale-100"
+          className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 scale-100 group-hover:scale-105 transition-all duration-700 ease-out"
         />
-        <div className="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-        <span className="absolute top-8 left-8 text-7xl font-[1000] italic text-white/5 group-hover:text-red-600 transition-colors z-10">
+        <div className="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        <span className="absolute top-8 left-8 text-7xl font-[1000] italic text-white/5 group-hover:text-red-600 transition-colors duration-500 z-10 select-none">
           {num}
         </span>
       </div>
