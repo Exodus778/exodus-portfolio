@@ -20,7 +20,7 @@ body {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.836);
   color: white; /* Set text color to white for better visibility */
   font-weight: 900;
-  opacity: o;
+  opacity: 0.12;
   text-transform: uppercase;
   /* Hardware acceleration for GSAP */
   will-change: transform, opacity;

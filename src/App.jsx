@@ -13,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -272,7 +273,7 @@ function App() {
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
-    if (selectedProject) {
+    if (selectedProject || isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = originalOverflow;
@@ -281,10 +282,12 @@ function App() {
     return () => {
       document.body.style.overflow = originalOverflow;
     };
-  }, [selectedProject]);
+  }, [selectedProject, isMobileMenuOpen]);
 
-  const scroll = (id) =>
+  const scroll = (id) => {
+    setIsMobileMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -308,14 +311,14 @@ ${contactForm.details}`,
       ref={mainRef}
       className="bg-[#030303] text-white selection:bg-red-600 overflow-x-hidden"
     >
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute top-0 w-full p-6 sm:p-10 z-50">
-          <nav className="relative w-full flex items-center uppercase tracking-[0.4em]">
-            <div className="nav-anim group border border-white/10 bg-zinc-950/40 backdrop-blur-md py-3 px-5 rounded-xl flex flex-col justify-center transition-all duration-300 hover:bg-red-600 hover:border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] select-none">
-              <p className="font-black text-xs leading-none text-white group-hover:text-black transition-colors duration-300">
+      <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden px-4 sm:px-0">
+        <div className="absolute top-0 w-full p-4 sm:p-6 lg:p-10 z-50">
+          <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between uppercase tracking-[0.28em] sm:tracking-[0.4em]">
+            <div className="nav-anim group border border-white/10 bg-zinc-950/40 backdrop-blur-md py-3 px-4 sm:px-5 rounded-xl flex flex-col justify-center transition-all duration-300 hover:bg-red-600 hover:border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] select-none">
+              <p className="font-black text-[10px] sm:text-xs leading-none text-white group-hover:text-black transition-colors duration-300">
                 Frontend
               </p>
-              <p className="text-[16px] text-red-600 font-[1000] tracking-normal mt-1 group-hover:text-black transition-colors duration-300">
+              <p className="text-sm sm:text-[16px] text-red-600 font-[1000] tracking-normal mt-1 group-hover:text-black transition-colors duration-300">
                 Developer
               </p>
             </div>
@@ -337,26 +340,80 @@ ${contactForm.details}`,
                 </button>
               ))}
             </div>
+
+            <button
+              type="button"
+              aria-label={
+                isMobileMenuOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
+              aria-expanded={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="nav-anim flex lg:hidden items-center justify-center rounded-xl border border-white/10 bg-zinc-950/60 p-3 text-white backdrop-blur-md"
+            >
+              <span className="flex flex-col gap-1.5">
+                <span
+                  className={`block h-0.5 w-5 bg-current transition-transform duration-300 ${isMobileMenuOpen ? "translate-y-2 rotate-45" : ""}`}
+                />
+                <span
+                  className={`block h-0.5 w-5 bg-current transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : "opacity-100"}`}
+                />
+                <span
+                  className={`block h-0.5 w-5 bg-current transition-transform duration-300 ${isMobileMenuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+                />
+              </span>
+            </button>
           </nav>
+
+          <AnimatePresence>
+            {isMobileMenuOpen ? (
+              <motion.div
+                initial={{ opacity: 0, y: -16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.24, ease: "easeOut" }}
+                className="mt-4 rounded-3xl border border-white/10 bg-black/90 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.55)] backdrop-blur-xl lg:hidden"
+              >
+                <div className="flex flex-col gap-3 text-sm font-black tracking-[0.28em] text-zinc-200 uppercase">
+                  {[
+                    ["Projects", "works"],
+                    ["Expertise", "expertise"],
+                    ["Testimonials", "testimonials"],
+                    ["Contact", "contact"],
+                  ].map(([label, id]) => (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => scroll(id)}
+                      className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-left transition-colors duration-300 hover:bg-red-600 hover:text-black"
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </div>
 
-        <h1 className="hero-bg-text absolute text-[28vw] font-[1000] italic leading-none select-none z-0 tracking-tighter opacity-90">
+        <h1 className="hero-bg-text absolute text-[30vw] sm:text-[28vw] font-[1000] italic leading-none select-none z-0 tracking-tighter opacity-90">
           EXODUS
         </h1>
 
-        <div className="main-char relative z-20 h-[88vh] pointer-events-none">
+        <div className="main-char relative z-20 h-[52vh] sm:h-[64vh] md:h-[74vh] lg:h-[88vh] pointer-events-none mt-12 sm:mt-10">
           <img
             src={heroImg}
-            className="h-full object-contain drop-shadow-[0_0_100px_rgba(255,0,0,0.1)]"
+            className="h-full max-w-full object-contain drop-shadow-[0_0_100px_rgba(255,0,0,0.1)]"
             alt="Gregory"
           />
         </div>
 
-        <div className="red-belt absolute bottom-[18%] w-[120%] -rotate-2 z-30 bg-red-600 py-6 border-y-8 border-black shadow-[0_30px_60px_rgba(0,0,0,0.8)] flex overflow-hidden">
+        <div className="red-belt absolute bottom-[11%] sm:bottom-[13%] lg:bottom-[18%] w-[145%] sm:w-[130%] lg:w-[120%] -rotate-2 z-30 bg-red-600 py-3 sm:py-4 lg:py-6 border-y-4 sm:border-y-6 lg:border-y-8 border-black shadow-[0_30px_60px_rgba(0,0,0,0.8)] flex overflow-hidden">
           <motion.div
             animate={{ x: [0, -1000] }}
             transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="flex whitespace-nowrap items-center gap-12 text-black font-[1000] italic text-lg uppercase"
+            className="flex whitespace-nowrap items-center gap-8 sm:gap-10 lg:gap-12 text-black font-[1000] italic text-sm sm:text-base lg:text-lg uppercase"
           >
             {[...Array(10)].map((_, i) => (
               <span key={i} className="flex items-center gap-12">
@@ -384,11 +441,11 @@ ${contactForm.details}`,
 
       <section
         id="about"
-        className="reveal-section min-h-screen bg-[#030303] px-6 sm:px-12 lg:px-20 py-32 md:py-48 flex items-center justify-center"
+        className="reveal-section min-h-screen bg-[#030303] px-4 sm:px-8 lg:px-20 py-20 sm:py-24 md:py-36 lg:py-48 flex items-center justify-center"
       >
         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <div className="lg:col-span-5 sticky lg:top-32">
-            <h2 className="reveal-item text-6xl sm:text-7xl md:text-8xl lg:text-[7vw] font-[1000] italic uppercase tracking-tighter leading-[0.85]">
+            <h2 className="reveal-item text-4xl sm:text-6xl md:text-8xl lg:text-[7vw] font-[1000] italic uppercase tracking-tighter leading-[0.85]">
               Your vision
               <br /> <span className="text-red-600">My Code.</span>
             </h2>
@@ -437,7 +494,7 @@ ${contactForm.details}`,
 
       <section
         id="expertise"
-        className="reveal-section bg-[#050505] px-6 sm:px-10 lg:px-20 py-28"
+        className="reveal-section bg-[#050505] px-4 sm:px-8 lg:px-20 py-20 sm:py-24 lg:py-28"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
@@ -445,7 +502,7 @@ ${contactForm.details}`,
               <p className="reveal-item text-[10px] tracking-[0.55em] uppercase text-zinc-500 mb-4">
                 Skills / Expertise
               </p>
-              <h2 className="reveal-item text-6xl md:text-[8vw] font-[1000] italic uppercase tracking-tighter leading-[0.9]">
+              <h2 className="reveal-item text-4xl sm:text-5xl md:text-[8vw] font-[1000] italic uppercase tracking-tighter leading-[0.9]">
                 Built for
                 <span className="text-red-600"> modern product teams.</span>
               </h2>
@@ -514,11 +571,11 @@ ${contactForm.details}`,
 
       <section
         id="works"
-        className="reveal-section min-h-screen bg-[#030303] px-6 sm:px-10 lg:px-16 py-32"
+        className="reveal-section min-h-screen bg-[#030303] px-4 sm:px-8 lg:px-16 py-20 sm:py-24 lg:py-32"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-20">
-            <h2 className="reveal-item text-7xl md:text-[10vw] font-[1000] italic uppercase tracking-tighter leading-[0.85]">
+            <h2 className="reveal-item text-5xl sm:text-6xl md:text-[10vw] font-[1000] italic uppercase tracking-tighter leading-[0.85]">
               Selected <span className="text-red-600">Works.</span>
             </h2>
             <p className="reveal-item max-w-xl text-zinc-400 text-lg leading-relaxed">
@@ -542,7 +599,7 @@ ${contactForm.details}`,
 
       <section
         id="testimonials"
-        className="reveal-section bg-[#050505] px-6 sm:px-10 lg:px-20 py-28"
+        className="reveal-section bg-[#050505] px-4 sm:px-8 lg:px-20 py-20 sm:py-24 lg:py-28"
       >
         <div className="max-w-7xl mx-auto">
           <p className="reveal-item text-[10px] tracking-[0.55em] uppercase text-zinc-500 mb-4">
@@ -595,7 +652,7 @@ ${contactForm.details}`,
 
       <section
         id="contact"
-        className="reveal-section min-h-screen bg-red-600 p-6 sm:p-10 relative overflow-hidden flex items-center"
+        className="reveal-section min-h-screen bg-red-600 p-4 sm:p-8 lg:p-10 relative overflow-hidden flex items-center"
       >
         <div className="absolute inset-0 opacity-10 font-[1000] text-[36vw] text-black italic select-none pointer-events-none leading-none flex items-center justify-center">
           HELLO
@@ -606,7 +663,7 @@ ${contactForm.details}`,
             <p className="text-[10px] tracking-[0.55em] uppercase mb-4">
               Contact / Booking
             </p>
-            <h2 className="text-6xl md:text-[8vw] font-[1000] italic uppercase leading-[0.9] mb-8">
+            <h2 className="text-4xl sm:text-5xl md:text-[8vw] font-[1000] italic uppercase leading-[0.9] mb-6 sm:mb-8">
               Let’s build
               <br />
               something sharp.
@@ -627,7 +684,7 @@ ${contactForm.details}`,
                   href="https://cal.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-2xl border border-black px-5 py-4 font-[1000] uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-colors"
+                  className="inline-flex w-full sm:w-auto items-center justify-center rounded-2xl border border-black px-5 py-4 font-[1000] uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-colors"
                 >
                   Book Discovery Call
                 </a>
@@ -635,7 +692,7 @@ ${contactForm.details}`,
                   href="https://wa.me/2349024233860"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-2xl border border-black px-5 py-4 font-[1000] uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-colors"
+                  className="inline-flex w-full sm:w-auto items-center justify-center rounded-2xl border border-black px-5 py-4 font-[1000] uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-colors"
                 >
                   WhatsApp Direct Note
                 </a>
@@ -696,7 +753,7 @@ ${contactForm.details}`,
               </p>
               <a
                 href={mailtoHref}
-                className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-6 py-4 text-black font-[1000] uppercase tracking-[0.2em] hover:scale-[1.02] transition-transform"
+                className="inline-flex w-full sm:w-auto items-center justify-center rounded-2xl bg-red-600 px-6 py-4 text-black font-[1000] uppercase tracking-[0.2em] hover:scale-[1.02] transition-transform"
               >
                 Send Project Brief
               </a>
@@ -706,7 +763,7 @@ ${contactForm.details}`,
       </section>
 
       <footer className="py-12 px-6 sm:px-10 bg-[#030303]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
           <p className="text-[10px] tracking-[0.8em] uppercase italic font-bold opacity-30 order-2 md:order-1">
             Adewole Gregory © 2024
           </p>
@@ -839,7 +896,7 @@ function ProjectCard({ num, project, onOpen }) {
 function ProjectModal({ project, onClose }) {
   return (
     <motion.div
-      className="fixed inset-0 z-100 bg-black/75 backdrop-blur-md p-4 sm:p-8 overflow-y-auto"
+      className="fixed inset-0 z-100 bg-black/75 backdrop-blur-md p-3 sm:p-6 lg:p-8 overflow-y-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -849,7 +906,7 @@ function ProjectModal({ project, onClose }) {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 24, opacity: 0 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="max-w-5xl mx-auto border border-white/10 rounded-4xl bg-[#0a0a0a] overflow-hidden"
+        className="max-w-5xl mx-auto border border-white/10 rounded-[2rem] sm:rounded-4xl bg-[#0a0a0a] overflow-hidden"
       >
         <div className="relative aspect-16/8 bg-zinc-900">
           {project.video.endsWith(".mp4") ? (
@@ -875,11 +932,11 @@ function ProjectModal({ project, onClose }) {
           >
             Close
           </button>
-          <div className="absolute left-6 right-6 bottom-6 sm:left-10 sm:right-10 sm:bottom-10">
+          <div className="absolute left-4 right-4 bottom-4 sm:left-8 sm:right-8 sm:bottom-8 lg:left-10 lg:right-10 lg:bottom-10">
             <p className="text-[10px] tracking-[0.45em] uppercase text-red-400 mb-3">
               Full Case Study
             </p>
-            <h3 className="text-4xl sm:text-6xl font-[1000] italic uppercase leading-none">
+            <h3 className="text-3xl sm:text-5xl lg:text-6xl font-[1000] italic uppercase leading-none">
               {project.title}
             </h3>
             <p className="text-zinc-300 mt-4 max-w-2xl">
@@ -888,7 +945,7 @@ function ProjectModal({ project, onClose }) {
           </div>
         </div>
 
-        <div className="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-8">
+        <div className="p-4 sm:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-6 sm:gap-8">
           <div className="space-y-6">
             <div className="grid sm:grid-cols-3 gap-4">
               <MetaCard label="Role" value={project.role} />
