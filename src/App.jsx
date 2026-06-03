@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "./assets/hero.png";
-import anitaPizzaVideo from "../public/anita-pizza.mp4";
-import daxWatchesImage from "../public/Dax-Watches.png";
-import exodeployImage from "../public/Exodeploy.png";
-import beautySenseImage from "../public/Beauty-Sense.png";
+
+const anitaPizzaVideo = "/anita-pizza.mp4";
+const daxWatchesImage = "/Dax-Watches.png";
+const exodeployImage = "/Exodeploy.png";
+const beautySenseImage = "/Beauty-Sense.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -691,8 +692,7 @@ ${contactForm.details}`,
 
             <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
               <p className="text-zinc-500 text-sm leading-relaxed max-w-sm">
-                Submitting opens your email client with the project brief
-                pre-filled for a faster conversation.
+                Will reply within 24 hours.
               </p>
               <a
                 href={mailtoHref}

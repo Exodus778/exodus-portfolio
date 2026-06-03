@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(), // 2. Add it to the plugins list
   ],
-  base: "exodus-portfolio", // 3. Set the base path for GitHub Pages
+  base: "/", // Vercel deploys from the domain root
 });
