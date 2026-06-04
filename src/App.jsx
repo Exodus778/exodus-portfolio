@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "./assets/hero.png";
-
+import { Analytics } from "@vercel/analytics/next";
 const anitaPizzaVideo = "/anita-pizza.mp4";
 const daxWatchesImage = "/Dax-Watches.png";
 const exodeployImage = "/Exodeploy.png";
