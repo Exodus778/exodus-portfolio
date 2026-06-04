@@ -242,7 +242,7 @@ function App() {
         )
         .from(
           ".main-char",
-          { y: 100, opacity: 0, duration: 1.2, ease: "power3.out" },
+          { y: 100, duration: 1.2, ease: "power3.out" },
           "-=1.2",
         )
         .from(
