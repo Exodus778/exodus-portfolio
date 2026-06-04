@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Analytics } from "@vercel/analytics/react";
 import heroImg from "./assets/hero.png";
 
 const anitaPizzaVideo = "/anita-pizza.mp4";
@@ -307,10 +308,12 @@ ${contactForm.details}`,
   )}`;
 
   return (
-    <div
-      ref={mainRef}
-      className="bg-[#030303] text-white selection:bg-red-600 overflow-x-hidden"
-    >
+    <>
+      <Analytics />
+      <div
+        ref={mainRef}
+        className="bg-[#030303] text-white selection:bg-red-600 overflow-x-hidden"
+      >
       <section className="relative min-h-[100svh] lg:min-h-screen w-full flex items-center justify-center overflow-hidden px-4 sm:px-0">
         <div className="absolute top-0 w-full p-4 sm:p-6 lg:p-10 z-50">
           <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between uppercase tracking-[0.28em] sm:tracking-[0.4em]">
@@ -805,7 +808,8 @@ ${contactForm.details}`,
           />
         ) : null}
       </AnimatePresence>
-    </div>
+      </div>
+    </>
   );
 }
 
