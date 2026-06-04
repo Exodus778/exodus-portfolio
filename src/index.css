@@ -90,3 +90,10 @@ body {
   will-change: transform, opacity;
   transform: translateZ(0); /* Forces GPU layer */
 }
+
+.hero-image {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+}
