@@ -242,7 +242,7 @@ function App() {
         )
         .from(
           ".main-char",
-          { y: 100, duration: 1.2, ease: "power3.out" },
+          { y: 100, opacity: 0, duration: 1.2, ease: "power3.out" },
           "-=1.2",
         )
         .from(
@@ -311,7 +311,7 @@ ${contactForm.details}`,
       ref={mainRef}
       className="bg-[#030303] text-white selection:bg-red-600 overflow-x-hidden"
     >
-      <section className="relative min-h-[100svh] lg:min-h-screen w-full flex items-center justify-center overflow-hidden px-4 sm:px-0">
+      <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden px-4 sm:px-0">
         <div className="absolute top-0 w-full p-4 sm:p-6 lg:p-10 z-50">
           <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between uppercase tracking-[0.28em] sm:tracking-[0.4em]">
             <div className="nav-anim group border border-white/10 bg-zinc-950/40 backdrop-blur-md py-3 px-4 sm:px-5 rounded-xl flex flex-col justify-center transition-all duration-300 hover:bg-red-600 hover:border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] select-none">
@@ -401,10 +401,10 @@ ${contactForm.details}`,
           EXODUS
         </h1>
 
-        <div className="main-char relative z-20 mt-16 flex h-[58svh] w-full max-w-[92vw] items-end justify-center sm:mt-10 sm:h-[64vh] sm:max-w-[78vw] md:h-[74vh] lg:h-[88vh] lg:max-w-none pointer-events-none">
+        <div className="main-char relative z-20 h-[52vh] sm:h-[64vh] md:h-[74vh] lg:h-[88vh] pointer-events-none mt-12 sm:mt-10">
           <img
             src={heroImg}
-            className="h-full w-full object-contain object-bottom drop-shadow-[0_0_100px_rgba(255,0,0,0.1)]"
+            className="h-full max-w-full object-contain drop-shadow-[0_0_100px_rgba(255,0,0,0.1)]"
             alt="Gregory"
           />
         </div>
@@ -906,7 +906,7 @@ function ProjectModal({ project, onClose }) {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 24, opacity: 0 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="max-w-5xl mx-auto border border-white/10 rounded-4xl sm:rounded-4xl bg-[#0a0a0a] overflow-hidden"
+        className="max-w-5xl mx-auto border border-white/10 rounded-[2rem] sm:rounded-4xl bg-[#0a0a0a] overflow-hidden"
       >
         <div className="relative aspect-16/8 bg-zinc-900">
           {project.video.endsWith(".mp4") ? (
