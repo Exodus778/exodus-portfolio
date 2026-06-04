@@ -407,7 +407,7 @@ ${contactForm.details}`,
           EXODUS
         </h1>
 
-        <div className="main-char relative z-20 mt-12 sm:mt-10 w-[80vw] max-w-[360px] sm:max-w-[420px] md:w-auto md:h-[74vh] lg:h-[88vh] pointer-events-none">
+        <div className="main-char relative z-20 mt-12 sm:mt-10 w-[80vw] max-w-[360px] sm:max-w-[460px] md:max-w-none md:h-[82vh] lg:h-[92vh] xl:h-[96vh] pointer-events-none">
           <img
             src={heroImg}
             className="hero-image block w-full h-auto md:h-full md:w-auto object-contain drop-shadow-[0_0_100px_rgba(255,0,0,0.1)]"
