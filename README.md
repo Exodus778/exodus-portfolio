@@ -143,7 +143,7 @@ If you plan to submit code, run the linter and keep commits focused and document
 
 ## Contact
 
-Maintained by Exodus — https://github.com/Exodus778
+CREATED and Maintained by Exodus — https://github.com/Exodus778
 
 ---
 
